@@ -99,7 +99,6 @@ AI-Clinical-CDSS/
 │   ├── app/
 │   │   ├── database/           # SQLite schema definitions & DB seed scripts
 │   │   │   ├── db.py           # DB connection context & helper queries
-│   │   │   └── database.db     # Local SQLite Database (Git ignored)
 │   │   ├── models/             # Serialized ML model binaries
 │   │   │   └── disease_model.pkl # Trained RandomForest model (Git ignored)
 │   │   ├── routes/             # REST endpoints (Predict, Chat, History)
