@@ -265,19 +265,19 @@ FastAPI automatically generates interactive Swagger documentation at [http://loc
 ## 🧠 Core Machine Learning & NLP Pipeline
 
 ### 1. NLP Phrase Parsing & Lemmatization (spaCy)
-The [nlp_service.py] utilizes spaCy's `en_core_web_sm` English tokenizer. It cleans input queries, performs lemmatization (converting words to their root forms, e.g., "coughing" -> "cough"), and cross-references them against our standard symptom features:
+The [nlp_service.py](file:///e:/Files/GITHUB/Al_Clinical_Decision_Support/backend/app/services/nlp_service.py) utilizes spaCy's `en_core_web_sm` English tokenizer. It cleans input queries, performs lemmatization (converting words to their root forms, e.g., "coughing" -> "cough"), and cross-references them against our standard symptom features:
 * **Features matched**: `fever`, `cough`, `shortness_of_breath`, `chest_pain`, `headache`, `sore_throat`, `fatigue`, `body_ache`, `loss_of_taste_smell`, `runny_nose`.
 * **Modifier Analysis**: The NLP service scans for severity adjectives (e.g., "severe", "critical", "extreme") to categorize the clinical complaint.
 
 ### 2. Random Forest Classification (Scikit-Learn)
-When the application starts, it checks for a serialized classifier. If missing, [train_model.py] dynamically compiles a supervised `RandomForestClassifier`:
+When the application starts, it checks for a serialized classifier. If missing, [train_model.py](file:///e:/Files/GITHUB/Al_Clinical_Decision_Support/backend/app/training/train_model.py) dynamically compiles a supervised `RandomForestClassifier`:
 * **Dataset**: A synthetic clinical dataset containing 750 patient records generated based on typical symptom probability matrices.
 * **Training Details**: The data is split (80% training, 20% test), stratified by class.
 * **Model Parameters**: 100 decision estimators, max depth of 8.
 * **Metrics**: Typically reaches >90% validation accuracy on test partitions.
 
 ### 3. Rule-Based Clinical Risk Stratification
-The [risk_service.py] takes the predicted disease, matched symptoms, and severity flags to assign a risk score:
+The [risk_service.py](file:///e:/Files/GITHUB/Al_Clinical_Decision_Support/backend/app/services/risk_service.py) takes the predicted disease, matched symptoms, and severity flags to assign a risk score:
 * **High**: Triggered by symptoms like `shortness_of_breath` or `chest_pain`, or if the classifier outputs a high-risk prediction like Pneumonia.
 * **Moderate**: Triggered by systemic features like a persistent `fever` combined with cough.
 * **Low**: Localized mild symptoms such as simple headache or runny nose.
